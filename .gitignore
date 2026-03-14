@@ -10,3 +10,6 @@
 /*/*/out/
 /*/build/
 /*/out/
+
+# Security: Sensitive credentials
+gradle.properties

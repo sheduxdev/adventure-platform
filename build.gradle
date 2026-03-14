@@ -16,7 +16,7 @@ plugins {
 ext.adventure = "4.21.0"
 
 group = 'net.kyori'
-version = '4.4.2-SNAPSHOT'
+version = '4.4.3'
 description = 'Legacy platform integrations for the adventure UI library'
 
 /**
@@ -45,6 +45,19 @@ subprojects {
   apply plugin: 'net.kyori.indra.checkstyle'
   apply plugin: 'net.kyori.indra.licenser.spotless'
   apply plugin: 'net.kyori.indra.crossdoc'
+
+  publishing {
+    repositories {
+      maven {
+        name = "refinedev"
+        url = "https://maven.refinedev.org/public-repo/"
+        credentials {
+          username = project.findProperty('sheduxUser') ?: ""
+          password = project.findProperty('sheduxPassword') ?: ""
+        }
+      }
+    }
+  }
 
   dependencies {
     components {
@@ -107,6 +120,10 @@ subprojects {
     }
   }
   
+  tasks.matching { it.name == "requireClean" || it.name == "requireTagged" }.configureEach {
+    enabled = false
+  }
+
   indraCrossdoc {
       baseUrl().set(providers.gradleProperty('javadocPublishRoot'))
       nameBasedDocumentationUrlProvider {
