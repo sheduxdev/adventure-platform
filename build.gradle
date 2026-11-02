@@ -49,7 +49,7 @@ subprojects {
   publishing {
     repositories {
       maven {
-        name = "refinedev"
+        name = "shedux"
         url = "https://maven.refinedev.org/public-repo/"
         credentials {
           username = project.findProperty('sheduxUser') ?: ""
